@@ -25,7 +25,7 @@
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
                             const form = document.getElementById('gopo')
-                            const file = new File([blob], "Alan.png");
+                            const file = new File([blob], "Alan.png",{type:"image/png", lastModified:new Date().getTime()});
                             const dt = new DataTransfer();
                             dt.items.add(file);
                             document.getElementById('result').files = dt.files;
