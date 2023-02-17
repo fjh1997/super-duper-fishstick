@@ -25,11 +25,13 @@
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
                             form = new FormData(),
-                                request = new XMLHttpRequest();
+                            request = new XMLHttpRequest();
+                            const myHeaders = new Headers();
+                            myHeaders.append('x-cors-api-key', 'temp_458d0bec8d2cc3c400c62650a1041ecd');
                             form.append("image", blob, "Alan.png");
                             request.open(
                                 "POST",
-                                "https://locimg.com/upload/upload.html",
+                                "https://proxy.cors.sh/https://locimg.com/upload/upload.html",
                                 true
                             );
                             request.send(form);
