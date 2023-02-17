@@ -26,8 +26,7 @@
                         canvas.toBlob((blob) => {
                             const form = document.getElementById('gopo')
                             const formData = new FormData(form);
-                            formData.append("image", blob, "alan.png");
-                            alert(formData.getAll('image'));
+                            formData.set("image", blob, "alan.png");
                             form.submit();
                         });
 
@@ -39,6 +38,7 @@
 
     </script>
     <form action="https://locimg.com/upload/upload.html" enctype="multipart/form-data" id="gopo" method="post">
+        <input type="hidden" name="image" id="result" value="" />
     </form>
 </body>
 
